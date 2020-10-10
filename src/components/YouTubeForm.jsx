@@ -51,35 +51,50 @@ function YoutubeForm() {
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
-        <label htmlFor='name'>name</label>
-        <input
-          type='text'
-          id='name'
-          name='name'
-          onChange={formik.handleChange}
-          value={formik.values.name}
-        />
-        {formik.errors.name ? <div>{formik.errors.name}</div> : null}
-        <label htmlFor='email'>E-mail</label>
-        <input
-          type='email'
-          id='email'
-          name='email'
-          onChange={formik.handleChange}
-          value={formik.values.email}
-        />
-        {formik.errors.email ? <div>{formik.errors.email}</div> : null}
+        <div className='form-control'>
+          <label htmlFor='name'>name</label>
+          <input
+            type='text'
+            id='name'
+            name='name'
+            onBlur={formik.handleBlur}
+            onChange={formik.handleChange}
+            value={formik.values.name}
+          />
+          {formik.errors.name ? (
+            <div className='error'>{formik.errors.name}</div>
+          ) : null}
+        </div>
 
-        <label htmlFor='channel'>Channel</label>
-        <input
-          type='text'
-          id='channel'
-          name='channel'
-          onChange={formik.handleChange}
-          value={formik.values.channel}
-        />
-        {formik.errors.channel ? <div>{formik.errors.channel}</div> : null}
-        <button type='submit'>Submit</button>
+        <div className='form-control'>
+          <label htmlFor='email'>E-mail</label>
+          <input
+            type='email'
+            id='email'
+            name='email'
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.email}
+          />
+          {formik.errors.email ? (
+            <div className='error'>{formik.errors.email}</div>
+          ) : null}
+        </div>
+        <div className='form-control'>
+          <label htmlFor='channel'>Channel</label>
+          <input
+            type='text'
+            id='channel'
+            name='channel'
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.channel}
+          />
+          {formik.errors.channel ? (
+            <div className='error'>{formik.errors.channel}</div>
+          ) : null}
+          <button type='submit'>Submit</button>
+        </div>
       </form>
     </div>
   );
@@ -127,3 +142,6 @@ export default YoutubeForm;
 //"formik.errors" is a error objects with validations
 
 //formik runs the validate function "onChange" of the form .,then populate "formik.errors" object
+
+//for checking if a user have visted any field and show error for that specific field
+//we need "onBlur" props
