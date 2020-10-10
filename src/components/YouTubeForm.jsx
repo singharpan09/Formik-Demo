@@ -2,17 +2,12 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 function YoutubeForm() {
-  //intialValues field name,corresponds to name attributes of individual field
-  //"formik.values" is a object that reflects the state of the form
-  //this we are providing to form field
-  //formik gives a helper method for form submission also
-  //apart from intialValues ,we can specify another property ,"onSubmit" ,and this property is a method
-  //which automatically receives form state as IT'S arguments
-
   const initialValues = {
     name: "",
     email: "",
     channel: "",
+    comment: "",
+    address: "",
   };
   const onSubmit = (values) => {
     console.log(values, "VVVVVV");
@@ -58,10 +53,38 @@ function YoutubeForm() {
           <Field type='email' id='email' name='email' />
           <ErrorMessage name='email' />
         </div>
+
         <div className='form-control'>
           <label htmlFor='channel'>Channel</label>
           <Field type='text' id='channel' name='channel' />
           <ErrorMessage name='channel' />
+          <div className='form-control'>
+            <label htmlFor='comment'>Comment</label>
+            <Field as='textarea' id='comment' name='comment' />
+          </div>
+
+          <div className='form-control'>
+            <label htmlFor='address'>Comment</label>
+            <Field name='address'>
+              {(props) => {
+                //   {console.log(props)}
+                const { field, meta, form } = props;
+                return (
+                  <div>
+                    <input type='text' id='address' {...field} />
+                    {meta.touched && meta.error ? (
+                      <div>{meta.error}</div>
+                    ) : null}
+                  </div>
+                );
+              }}
+              {/* But this input element is not hooked into Formik 
+              so we need props for this,To hook input with formik we need to spread field props to input attribute
+            meta props will be used to handle errors
+            */}
+            </Field>
+          </div>
+
           <button type='submit'>Submit</button>
         </div>
       </Form>
@@ -93,3 +116,9 @@ export default YoutubeForm;
 //ErrorMessage component steps 1:import ErrorMessage 2-use Error Component and pass it name props
 //which is equal to name attribute for Field component
 //ErrorMessage take care of error message and show error if a field is visted and have error message
+
+//Field as props have "input" as default ,,as can also be replaced with "component"
+
+//RenderProps pattern
+//In this we use a function as children to the component
+//the function will be arrow function which will return JSX
