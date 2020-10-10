@@ -48,6 +48,7 @@ function YoutubeForm() {
 
   console.log(formik.values, "FOrm data");
   console.log(formik.errors, "Errors Data");
+  console.log(formik.touched, "Fields visited");
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
@@ -145,3 +146,5 @@ export default YoutubeForm;
 
 //for checking if a user have visted any field and show error for that specific field
 //we need "onBlur" props
+
+//formik stores the visted field in "touched" object
