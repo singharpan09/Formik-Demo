@@ -14,7 +14,7 @@ function YoutubeForm() {
       twitter: "",
     },
     phoneNumber: [],
-    phNumbers: [],
+    phNumbers: [""],
   };
   const onSubmit = (formData) => {
     console.log(formData, "VVVVVV");
@@ -119,8 +119,15 @@ function YoutubeForm() {
                     return (
                       <div key={index}>
                         <Field name={`phNumbers[${index}]`} />
-                        <button type='button'>-</button>
-                        <button type='button'>+</button>
+                        {index > 0 && (
+                          <button type='button' onClick={() => remove(index)}>
+                            -
+                          </button>
+                        )}
+                        {/* remove button only if more than one present */}
+                        <button type='button' onClick={() => push("")}>
+                          +
+                        </button>
                       </div>
                     );
                   })}
@@ -138,3 +145,4 @@ function YoutubeForm() {
 export default YoutubeForm;
 
 //we extract desired method from props provided by fieldArray
+//pushing empty value && removing value from index
