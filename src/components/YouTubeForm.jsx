@@ -194,7 +194,7 @@ function YoutubeForm() {
             >
               Visit Fields
             </button>
-            Validate All
+
             <button type='submit'>Submit</button>
           </Form>
         );
@@ -228,3 +228,5 @@ export default YoutubeForm;
 //setTouched set touched for multiple fields
 
 //setTouched takes an object as argument which specify field names to be touched
+
+//useCase of maually trgigging validations eg....validating if a username exists in database
