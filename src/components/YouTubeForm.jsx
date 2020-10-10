@@ -108,8 +108,11 @@ function YoutubeForm() {
         <div>
           <label htmlFor='phoneNumbers'>Add List of Phone Numbers</label>
           <FieldArray name='phNumbers'>
-            {(props) => {
-              console.log(props, "FFFFFFFF");
+            {(fieldArrayProps) => {
+              const { remove, form, push } = fieldArrayProps;
+              const { values } = form;
+              const { phNumbers } = values;
+              console.log(phNumbers, "XXXX");
               return <div>HIII</div>;
             }}
           </FieldArray>
@@ -122,13 +125,4 @@ function YoutubeForm() {
 
 export default YoutubeForm;
 
-//For Custom Error message in ErrorMessage Component we have to pass component props to ErrorMessage Component
-//we can use renderProps in ErrorComponent which receive error as props
-
-//FieldArray component helps in dynamic form control
-//It helps in common array and list manipulations
-//collecting dynamic array and object is maintained through dynamic form control
-//means intially we provide one field to user and give user option to add more
-//As we are using dyamic array so we will not use Field instead will use "FieldArray" component of formik
-//to use dynamic array we need to use render props methods
-//it automatically receive some props
+//we extract desired method from props provided by fieldArray
