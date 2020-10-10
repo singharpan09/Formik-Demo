@@ -1,7 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 
-function YoutubeForm() {
+function OldYouTubeForm() {
   //intialValues field name,corresponds to name attributes of individual field
   //"formik.values" is a object that reflects the state of the form
   //this we are providing to form field
@@ -58,7 +58,9 @@ function YoutubeForm() {
             type='text'
             id='name'
             name='name'
-            {...formik.getFieldProps("name")}
+            onBlur={formik.handleBlur}
+            onChange={formik.handleChange}
+            value={formik.values.name}
           />
           {formik.touched.name && formik.errors.name ? (
             <div className='error'>{formik.errors.name}</div>
@@ -71,7 +73,9 @@ function YoutubeForm() {
             type='email'
             id='email'
             name='email'
-            {...formik.getFieldProps("email")}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.email}
           />
           {formik.touched.email && formik.errors.email ? (
             <div className='error'>{formik.errors.email}</div>
@@ -83,7 +87,9 @@ function YoutubeForm() {
             type='text'
             id='channel'
             name='channel'
-            {...formik.getFieldProps("channel")}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.channel}
           />
           {formik.touched.channel && formik.errors.channel ? (
             <div className='error'>{formik.errors.channel}</div>
@@ -95,7 +101,7 @@ function YoutubeForm() {
   );
 }
 
-export default YoutubeForm;
+export default OldYouTubeForm;
 
 //useformik hooks help in mananging form state,Handling form submission,validation and error messages
 //useformik is a hook(function) ,we need to call it in our component
@@ -142,3 +148,8 @@ export default YoutubeForm;
 //we need "onBlur" props
 
 //formik stores the visted field in "touched" object
+
+//&& Removing boiler plate code
+//three props are similar across all fields ..onChange,onBlur,value
+//formik provides a helper method "getFieldProps" which behind the scene add this props
+//to this helper method we pass a "name" field of name attribute
