@@ -32,6 +32,9 @@ function YoutubeForm() {
     if (!values.name) {
       errors.name = "Required field";
     }
+    // if (!values.comment) {
+    //   errors.comment = "Comment is a Required Field";
+    // }
     if (!values.email) {
       errors.email = "EMail is required field";
     }
@@ -46,13 +49,21 @@ function YoutubeForm() {
     return errors;
   };
 
+  const validateComments = (values) => {
+    // this functions automatically gets values of the Field for which it is speified
+    let errors = {};
+    if (!values) {
+      errors = "Comment is a Required Field..you can't leave it";
+    }
+    return errors;
+  };
   return (
     <Formik
       initialValues={initialValues}
       onSubmit={onSubmit}
       validate={validate}
       validateOnChange={false}
-      validateOnBlur={false}
+      // validateOnBlur={false}
     >
       <Form>
         <div className='form-control'>
@@ -79,11 +90,17 @@ function YoutubeForm() {
 
         <div className='form-control'>
           <label htmlFor='comment'>Comment</label>
-          <Field as='textarea' id='comment' name='comment' />
+          <Field
+            as='textarea'
+            id='comment'
+            name='comment'
+            validate={validateComments}
+          />
+          <ErrorMessage name='comment' component={TextError} />
         </div>
 
         <div className='form-control'>
-          <label htmlFor='address'>Comment</label>
+          <label htmlFor='address'>Address</label>
           <FastField name='address'>
             {(props) => {
               {
@@ -162,3 +179,11 @@ export default YoutubeForm;
 //second secenrio ...on any onBlur event in the form
 //third secerio..when submit is click....form does not submit until all validation passed
 //we can provide prop to not validate on 1, & 2 secerio
+
+//There is two way for specifying the validation 1--we pass custom validation function using validate props
+//2-we can specify (Yup library ) sechema using validationSechema props
+//bOTH THese props are avilabele at higher level formik component
+
+//Formik also allow to specify validation function at field level
+
+//We can specify custuom validation at field level using validate props
