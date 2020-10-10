@@ -8,36 +8,42 @@ function YoutubeForm() {
   //formik gives a helper method for form submission also
   //apart from intialValues ,we can specify another property ,"onSubmit" ,and this property is a method
   //which automatically receives form state as IT'S arguments
-  const formik = useFormik({
-    initialValues: {
-      name: "",
-      email: "",
-      channel: "",
-    },
-    onSubmit: (values) => {
-      console.log(values, "VVVVVV");
-    },
-    validate: (values) => {
-      // values.name ,values.email,values,channel
-      //errors.name,errors.email,errors.channel
-      //errors.name='This field is required'
-      let errors = {};
-      if (!values.name) {
-        errors.name = "Required field";
-      }
-      if (!values.email) {
-        errors.email = "EMail is required field";
-      }
-      if (!values.channel) {
-        errors.channel = "This is Required field";
-      } else if (
-        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-      ) {
-        errors.email = "Invalid email format";
-      }
 
-      return errors;
-    },
+  const initialValues={
+    name: "",
+    email: "",
+    channel: "",
+  },
+  const onSubmit=(values) => {
+    console.log(values, "VVVVVV");
+  },
+
+  const validate=(values) => {
+    // values.name ,values.email,values,channel
+    //errors.name,errors.email,errors.channel
+    //errors.name='This field is required'
+    let errors = {};
+    if (!values.name) {
+      errors.name = "Required field";
+    }
+    if (!values.email) {
+      errors.email = "EMail is required field";
+    }
+    if (!values.channel) {
+      errors.channel = "This is Required field";
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+    ) {
+      errors.email = "Invalid email format";
+    }
+
+    return errors;
+  },
+
+  const formik = useFormik({
+    initialValues,
+    onSubmit,
+    validate, 
   });
 
   return (
