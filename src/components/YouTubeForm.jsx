@@ -9,16 +9,16 @@ function YoutubeForm() {
   //apart from intialValues ,we can specify another property ,"onSubmit" ,and this property is a method
   //which automatically receives form state as IT'S arguments
 
-  const initialValues={
+  const initialValues = {
     name: "",
     email: "",
     channel: "",
-  },
-  const onSubmit=(values) => {
+  };
+  const onSubmit = (values) => {
     console.log(values, "VVVVVV");
-  },
+  };
 
-  const validate=(values) => {
+  const validate = (values) => {
     // values.name ,values.email,values,channel
     //errors.name,errors.email,errors.channel
     //errors.name='This field is required'
@@ -38,14 +38,16 @@ function YoutubeForm() {
     }
 
     return errors;
-  },
+  };
 
   const formik = useFormik({
     initialValues,
     onSubmit,
-    validate, 
+    validate,
   });
 
+  console.log(formik.values, "FOrm data");
+  console.log(formik.errors, "Errors Data");
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
@@ -57,6 +59,7 @@ function YoutubeForm() {
           onChange={formik.handleChange}
           value={formik.values.name}
         />
+        {formik.errors.name ? <div>{formik.errors.name}</div> : null}
         <label htmlFor='email'>E-mail</label>
         <input
           type='email'
@@ -65,6 +68,7 @@ function YoutubeForm() {
           onChange={formik.handleChange}
           value={formik.values.email}
         />
+        {formik.errors.name ? <div>{formik.errors.name}</div> : null}
 
         <label htmlFor='channel'>Channel</label>
         <input
@@ -74,6 +78,7 @@ function YoutubeForm() {
           onChange={formik.handleChange}
           value={formik.values.channel}
         />
+        {formik.errors.name ? <div>{formik.errors.name}</div> : null}
         <button type='submit'>Submit</button>
       </form>
     </div>
@@ -118,3 +123,7 @@ export default YoutubeForm;
 //2:Keys of the error object should be similar to that of values object && also key corresponds to name attribute for form field
 
 //3:VALUES of that key should be a string indicating what the error message should be for that particular field
+
+//"formik.errors" is a error objects with validations
+
+//formik runs the validate function "onChange" of the form .,then populate "formik.errors" object
