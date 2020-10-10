@@ -1,5 +1,12 @@
 import React from "react";
-import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
+import {
+  Formik,
+  Form,
+  Field,
+  ErrorMessage,
+  FieldArray,
+  FastField,
+} from "formik";
 import TextError from "./TextError";
 
 function YoutubeForm() {
@@ -75,9 +82,11 @@ function YoutubeForm() {
 
         <div className='form-control'>
           <label htmlFor='address'>Comment</label>
-          <Field name='address'>
+          <FastField name='address'>
             {(props) => {
-              //   {console.log(props)}
+              {
+                console.log(props, "FieldProps");
+              }
               const { field, meta, form } = props;
               return (
                 <div>
@@ -86,7 +95,7 @@ function YoutubeForm() {
                 </div>
               );
             }}
-          </Field>
+          </FastField>
         </div>
 
         <div className='form-control'>
@@ -146,3 +155,18 @@ export default YoutubeForm;
 
 //we extract desired method from props provided by fieldArray
 //pushing empty value && removing value from index
+
+//last component is fastField which is used for form optimizatin
+//it is worth useful when we have more than 30 fields or complex form validations
+
+//Field VS FastField
+
+//Check difference in props of Field and FastField
+//Field props is consoled 2 times in Field Component
+//any onChnage is rendering all fields in Field component
+
+//FastField avoid rendering of other Field components
+//FastField is Optimizes version of Field component
+//it internally implements shouldComponentUpdate lifeCycle method
+
+//%%%%% FastField should only be used field if fields are independent of each other ****//
