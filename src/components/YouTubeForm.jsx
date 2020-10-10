@@ -113,7 +113,19 @@ function YoutubeForm() {
               const { values } = form;
               const { phNumbers } = values;
               console.log(phNumbers, "XXXX");
-              return <div>HIII</div>;
+              return (
+                <div>
+                  {phNumbers.map((item, index) => {
+                    return (
+                      <div key={index}>
+                        <Field name={`phNumbers[${index}]`} />
+                        <button type='button'>-</button>
+                        <button type='button'>+</button>
+                      </div>
+                    );
+                  })}
+                </div>
+              );
             }}
           </FieldArray>
         </div>
