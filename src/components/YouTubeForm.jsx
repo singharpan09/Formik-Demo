@@ -68,7 +68,7 @@ function YoutubeForm() {
           onChange={formik.handleChange}
           value={formik.values.email}
         />
-        {formik.errors.name ? <div>{formik.errors.name}</div> : null}
+        {formik.errors.email ? <div>{formik.errors.email}</div> : null}
 
         <label htmlFor='channel'>Channel</label>
         <input
@@ -78,7 +78,7 @@ function YoutubeForm() {
           onChange={formik.handleChange}
           value={formik.values.channel}
         />
-        {formik.errors.name ? <div>{formik.errors.name}</div> : null}
+        {formik.errors.channel ? <div>{formik.errors.channel}</div> : null}
         <button type='submit'>Submit</button>
       </form>
     </div>
