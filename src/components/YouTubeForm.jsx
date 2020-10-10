@@ -51,6 +51,8 @@ function YoutubeForm() {
       initialValues={initialValues}
       onSubmit={onSubmit}
       validate={validate}
+      validateOnChange={false}
+      validateOnBlur={false}
     >
       <Form>
         <div className='form-control'>
@@ -121,7 +123,7 @@ function YoutubeForm() {
               const { remove, form, push } = fieldArrayProps;
               const { values } = form;
               const { phNumbers } = values;
-              console.log(phNumbers, "XXXX");
+              console.log(form.errors, "XXXX");
               return (
                 <div>
                   {phNumbers.map((item, index) => {
@@ -153,20 +155,10 @@ function YoutubeForm() {
 
 export default YoutubeForm;
 
-//we extract desired method from props provided by fieldArray
-//pushing empty value && removing value from index
-
-//last component is fastField which is used for form optimizatin
-//it is worth useful when we have more than 30 fields or complex form validations
-
-//Field VS FastField
-
-//Check difference in props of Field and FastField
-//Field props is consoled 2 times in Field Component
-//any onChnage is rendering all fields in Field component
-
-//FastField avoid rendering of other Field components
-//FastField is Optimizes version of Field component
-//it internally implements shouldComponentUpdate lifeCycle method
-
-//%%%%% FastField should only be used field if fields are independent of each other ****//
+//now checking we form validation runs
+//validaion does not run on mounting the component
+//check when error object is populated...it is not populated intially
+//first secenrio ...it start populating when onChange is called
+//second secenrio ...on any onBlur event in the form
+//third secerio..when submit is click....form does not submit until all validation passed
+//we can provide prop to not validate on 1, & 2 secerio
