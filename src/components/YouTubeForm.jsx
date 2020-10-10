@@ -1,5 +1,5 @@
 import React from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
 import TextError from "./TextError";
 
 function YoutubeForm() {
@@ -14,6 +14,7 @@ function YoutubeForm() {
       twitter: "",
     },
     phoneNumber: [],
+    phNumbers: [],
   };
   const onSubmit = (formData) => {
     console.log(formData, "VVVVVV");
@@ -104,6 +105,15 @@ function YoutubeForm() {
           <label htmlFor='SecondaryPhone'>Secondary Phone</label>
           <Field type='text' id='SecondaryPhone' name='phoneNumber[1]' />
         </div>
+        <div>
+          <label htmlFor='phoneNumbers'>Add List of Phone Numbers</label>
+          <FieldArray name='phNumbers'>
+            {(props) => {
+              console.log(props, "FFFFFFFF");
+              return <div>HIII</div>;
+            }}
+          </FieldArray>
+        </div>
         <button type='submit'>Submit</button>
       </Form>
     </Formik>
@@ -114,3 +124,11 @@ export default YoutubeForm;
 
 //For Custom Error message in ErrorMessage Component we have to pass component props to ErrorMessage Component
 //we can use renderProps in ErrorComponent which receive error as props
+
+//FieldArray component helps in dynamic form control
+//It helps in common array and list manipulations
+//collecting dynamic array and object is maintained through dynamic form control
+//means intially we provide one field to user and give user option to add more
+//As we are using dyamic array so we will not use Field instead will use "FieldArray" component of formik
+//to use dynamic array we need to use render props methods
+//it automatically receive some props
